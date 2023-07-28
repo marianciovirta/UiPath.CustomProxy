@@ -1,0 +1,50 @@
+﻿<Window x:Class="UiPath.CustomProxy.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UiPath.CustomProxy"
+        mc:Ignorable="d"
+        Title="UiPath Custom proxy" Height="450" Width="1100">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="30"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="150"/>
+    </Grid.RowDefinitions>
+    <Grid>
+      <ToolBar ToolBarTray.IsLocked="True">
+        <Button Click="ToggleServerCommand" Content="{Binding ToggleServerTitle}" Margin="0 0 5 0" 
+                Padding="5 0 5 0" VerticalAlignment="Stretch" Height="Auto"/>
+        <Button Click="LoadConfigCommand" Content="Load config" IsEnabled="{Binding IsServerStopped}" 
+                Padding="5 0 5 0" VerticalAlignment="Stretch" Height="Auto"/>
+        <Button Click="ResetConfigCommand" Content="Reset config" IsEnabled="{Binding IsServerStopped}" 
+                Padding="5 0 5 0" VerticalAlignment="Stretch" Height="Auto"/>
+        <Button Click="ExportConfigCommand" Content="Export config" IsEnabled="{Binding IsServerStopped}" 
+                Padding="5 0 5 0" VerticalAlignment="Stretch" Height="Auto"/>
+      </ToolBar>
+    </Grid>
+    <Grid Grid.Row="1">
+      <TabControl Name="TabControl">
+        <TabControl.ItemTemplate>
+          <DataTemplate>
+            <TextBlock Text="{Binding Name}"/>
+          </DataTemplate>
+        </TabControl.ItemTemplate>
+        <TabControl.ContentTemplate>
+          <DataTemplate>
+            <TextBox Text="{Binding Content, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AcceptsTab="False" AcceptsReturn="True" 
+                     TextChanged="TextChangedEventHandler" IsEnabled="{Binding ElementName=OutputConsole, Path=DataContext.IsServerStopped}"/>
+          </DataTemplate>
+        </TabControl.ContentTemplate>
+      </TabControl>
+    </Grid>
+    <Grid Grid.Row="2">
+      <Border BorderBrush="LightGray" BorderThickness="0 1 0 0">
+        <ScrollViewer Name="ScrollViewer" Margin="0" Background="#fff">
+          <TextBlock Name="OutputConsole"  Foreground="#000" FontFamily="Consolas" Padding="10"/>
+        </ScrollViewer>
+      </Border>
+    </Grid>
+  </Grid>
+</Window>

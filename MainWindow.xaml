@@ -15,7 +15,7 @@
     <Grid>
       <ToolBar ToolBarTray.IsLocked="True">
         <Button Click="ToggleServerCommand" Content="{Binding ToggleServerTitle}" Margin="0 0 5 0" 
-                Padding="5 0 5 0" VerticalAlignment="Stretch" Height="Auto"/>
+                Padding="5 0 5 0" VerticalAlignment="Stretch" Height="Auto" ToolTip="Toggle server"/>
         <Button Click="LoadConfigCommand" Content="Load config" IsEnabled="{Binding IsServerStopped}" 
                 Padding="5 0 5 0" VerticalAlignment="Stretch" Height="Auto"/>
         <Button Click="ResetConfigCommand" Content="Reset config" IsEnabled="{Binding IsServerStopped}" 
